@@ -1,9 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .Home {
     font-family: Arial, sans-serif;
     text-align: center;
-    margin: 20px;
   }
-  
+
   .header {
     background-color: #f4f4f4;
     padding: 20px;
@@ -49,4 +53,28 @@
   
   button:hover {
     background-color: #0056b3;
+  }
+
+  /*Responsividade*/
+
+  @media (max-width: 600px) {
+    .header h1 {
+      font-size: 2em;
+    }
+  
+    .header p {
+      font-size: 1em; 
+    }
+  
+    .form-container {
+      padding: 20px;
+      width: 90%;
+    }
+  }
+ 
+  @media (min-width: 300px) and (max-width: 599px) {
+    .form-container {
+      padding: 5px !important;
+      width: 70% !important;
+    }
   }

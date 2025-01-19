@@ -1,0 +1,11 @@
+{
+    "home": {
+        "title": "Jornal 24H",
+        "subtitle": "Inscreva-se para receber as nossas últimas notícias.",
+        "labelName": "Seu Nome",
+        "labelEmail": "Seu melhor E-mail",
+        "sendButton": "Enviar",
+        "thanksMessage": "Agradecemos sua inscrição",
+        "backgroundImage": "https://img.freepik.com/fotos-gratis/variedade-de-pecas-de-jornal-vista-superior_23-2149318830.jpg"
+    }
+}

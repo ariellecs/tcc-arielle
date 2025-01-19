@@ -1,31 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import './home.css'; //Adiciona folha de estilo
+import React, {useState } from 'react';
+import './home.css'; //Adiciona folha de estilo padrão
+//import texts from '../static/sites/site1/text.json';
+import texts from '../static/sites/site2/text.json';
+import '../static/sites/site2/style.css';
 import supabase from '../config/supabaseClient';
 
 function Home() {
 
-  const [fetchError, setFetchError] = useState(null);
-  const [sites, setSites] = useState(null);
-
-  useEffect(() => {
-    const fetchSites = async () => {
-      const {data, error} = await supabase.from('sites').select('*');
-
-      if (error){
-        setFetchError('Could not fetch the sites');
-        setSites(null);
-        console.log(error)
-      }
-      if (data){
-        setSites(data);
-        setFetchError(null);
-      }
-    }
-
-    fetchSites();
-  }, []);
-
-  const backgroundImage = null;
+  const {home} = texts;
 
   const [formData, setFormData] = useState({
     name: '',
@@ -46,36 +28,45 @@ function Home() {
   // Manipula o envio do formulário
   const handleSubmit = (e) => {
     e.preventDefault();
+
     console.log('Dados enviados:', formData);
+    
+    const insertData = async () => {
+      const { data, error } = await supabase
+      .from('subscribers')
+      .insert([
+        { name: formData.name, email: formData.email },
+      ])
+      .select()
+    }
+    insertData();
+    
     setSubmitted(true);
   };
 
-  console.log(sites);
-
   return (
     <div className="Home">
-      {fetchError && (<p>{fetchError}</p>)}
       {/* Descrição */}
       <div 
         className="header" 
         style={{
-          backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'none', /* Se tem imagem de fundo, insere no topo do site */
+          backgroundImage: home.backgroundImage ? `url(${home.backgroundImage})` : 'none', /* Se tem imagem de fundo, insere no topo do site */
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
         }}
       >
-        <h1>title</h1>
-        <p>subtitle</p>
+        <h1>{home.title}</h1>
+        <p>{home.subtitle}</p>
       </div>
       {/* Formulário */}
       <div className="form-container">
         {submitted ? (
-          <h2>thanksMessage, {formData.name}!</h2>
+          <h2>{home.thanksMessage}, {formData.name}!</h2>
         ) : (
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="name">labelName</label>
+              <label htmlFor="name">{home.labelName}</label>
               <input
                 type="text"
                 id="name"
@@ -87,7 +78,7 @@ function Home() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="email">labelEmail</label>
+              <label htmlFor="email">{home.labelEmail}</label>
               <input
                 type="email"
                 id="email"
@@ -98,7 +89,7 @@ function Home() {
               />
             </div>
 
-            <button type="submit">sendButton</button>
+            <button type="submit">{home.sendButton}</button>
           </form>
         )}
       </div>
