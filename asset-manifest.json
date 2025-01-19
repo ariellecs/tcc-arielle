@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/tcc-arielle/static/css/main.2573d852.css",
+    "main.js": "/tcc-arielle/static/js/main.e9cc27c2.js",
+    "static/js/952.4c43126a.chunk.js": "/tcc-arielle/static/js/952.4c43126a.chunk.js",
+    "index.html": "/tcc-arielle/index.html",
+    "main.2573d852.css.map": "/tcc-arielle/static/css/main.2573d852.css.map",
+    "main.e9cc27c2.js.map": "/tcc-arielle/static/js/main.e9cc27c2.js.map",
+    "952.4c43126a.chunk.js.map": "/tcc-arielle/static/js/952.4c43126a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2573d852.css",
+    "static/js/main.e9cc27c2.js"
+  ]
+}
