@@ -1,8 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './home.css'; //Adiciona folha de estilo
-
+import supabase from '../config/supabaseClient';
 
 function Home() {
+
+  const [fetchError, setFetchError] = useState(null);
+  const [sites, setSites] = useState(null);
+
+  useEffect(() => {
+    const fetchSites = async () => {
+      const {data, error} = await supabase.from('sites').select('*');
+
+      if (error){
+        setFetchError('Could not fetch the sites');
+        setSites(null);
+        console.log(error)
+      }
+      if (data){
+        setSites(data);
+        setFetchError(null);
+      }
+    }
+
+    fetchSites();
+  }, []);
 
   const backgroundImage = null;
 
@@ -29,8 +50,11 @@ function Home() {
     setSubmitted(true);
   };
 
+  console.log(sites);
+
   return (
     <div className="Home">
+      {fetchError && (<p>{fetchError}</p>)}
       {/* Descrição */}
       <div 
         className="header" 
@@ -41,17 +65,17 @@ function Home() {
           backgroundRepeat: 'no-repeat',
         }}
       >
-        <h1>Bem-vindo ao nosso site!</h1>
-        <p>Inscreva-se para receber as nossas últimas atualizações diretamente no seu email.</p>
+        <h1>title</h1>
+        <p>subtitle</p>
       </div>
       {/* Formulário */}
       <div className="form-container">
         {submitted ? (
-          <h2>Obrigado por se inscrever, {formData.name}!</h2>
+          <h2>thanksMessage, {formData.name}!</h2>
         ) : (
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="name">Nome</label>
+              <label htmlFor="name">labelName</label>
               <input
                 type="text"
                 id="name"
@@ -63,7 +87,7 @@ function Home() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">labelEmail</label>
               <input
                 type="email"
                 id="email"
@@ -74,7 +98,7 @@ function Home() {
               />
             </div>
 
-            <button type="submit">Inscrever-se</button>
+            <button type="submit">sendButton</button>
           </form>
         )}
       </div>
