@@ -1,9 +1,8 @@
 import React, {useState } from 'react';
 import './home.css'; //Adiciona folha de estilo padrão
-//import texts from '../static/sites/site1/text.json';
-import texts from '../static/sites/site2/text.json';
-import '../static/sites/site2/style.css';
-import supabase from '../config/supabaseClient';
+import texts from '../static/sites/site1/text.json';
+//import texts from '../static/sites/site2/text.json';
+//import '../static/sites/site2/style.css';
 
 function Home() {
 
@@ -28,19 +27,7 @@ function Home() {
   // Manipula o envio do formulário
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log('Dados enviados:', formData);
-    
-    const insertData = async () => {
-      const { data, error } = await supabase
-      .from('subscribers')
-      .insert([
-        { name: formData.name, email: formData.email },
-      ])
-      .select()
-    }
-    insertData();
-    
+    console.log('Dados enviados:', formData);    
     setSubmitted(true);
   };
 
